@@ -16,12 +16,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
+
 		batch = new SpriteBatch();
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         bug = new Bug(32, 32);
         bug.setSize(16,16);
-
+        Gdx.input.setInputProcessor(new OwnInputProcessor(bug));
         stage.addActor(bug);
+
 	}
 
 	@Override
