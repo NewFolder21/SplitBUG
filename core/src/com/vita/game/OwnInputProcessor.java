@@ -19,30 +19,48 @@ public class OwnInputProcessor implements InputProcessor {
     public boolean keyDown(int keycode) {
         switch (keycode){
             case Input.Keys.DOWN:
-                bug.down();
+                bug.setUpMove(true);
                 break;
             case Input.Keys.UP:
-                bug.up();
+                bug.setDownMove(true);
                 break;
             case Input.Keys.LEFT:
-                bug.left();
+                bug.setLeftMove(true);
                 break;
             case Input.Keys.RIGHT:
-                bug.right();
+                bug.setRightMove(true);
                 break;
             default:
                 break;
         }
-        return false;
+        return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+
+        switch (keycode){
+            case Input.Keys.DOWN:
+                bug.setUpMove(false);
+                break;
+            case Input.Keys.UP:
+                bug.setDownMove(false);
+                break;
+            case Input.Keys.LEFT:
+                bug.setLeftMove(false);
+                break;
+            case Input.Keys.RIGHT:
+                bug.setRightMove(false);
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override
     public boolean keyTyped(char character) {
+        Gdx.app.log("OwnInputProcessor : ", "" + character);
         return false;
     }
 
