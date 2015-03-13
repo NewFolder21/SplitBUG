@@ -1,8 +1,8 @@
 package com.vita.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.vita.game.actors.Bug;
 
 /**
  * Created by DzEN on 11.03.2015.
@@ -60,7 +60,6 @@ public class OwnInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyTyped(char character) {
-        Gdx.app.log("OwnInputProcessor : ", "" + character);
         return false;
     }
 
