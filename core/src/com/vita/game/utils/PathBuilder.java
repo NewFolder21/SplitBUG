@@ -9,13 +9,14 @@ import java.util.ArrayList;
  * Created by vitaliy on 13.03.15.
  */
 public class PathBuilder {
-
     private ArrayList<Vector2> path;
     private int previousDirection;
     private Vector2 borderMin, borderMax;
     private final float step = 40.0f;
     boolean leftMove, rightMove, downMove, upMove;
-
+    /*0 : 0 ; vector
+    * 1 : 3 ; vector
+    * */
 
     public PathBuilder(Vector2 start, Vector2 borderMin, Vector2 borderMax){
         path = new ArrayList<>();
@@ -30,59 +31,106 @@ public class PathBuilder {
 
             if(previousDirection != 4){
                 Vector2 vec = new Vector2();
+                vec.x = path.get(path.size() - 1).x - step * Gdx.graphics.getDeltaTime();
+                vec.y = path.get(path.size() - 1).y;
+
+                if(vec.x < borderMin.x)
+                    vec.x = borderMin.x;
+
+                path.add(vec);
+                Gdx.app.log("PATH LEFT (C): ", "" + vec.x);
+                vec = null;
             }else{
+                Vector2 vec = path.get(path.size() - 1);
+                vec.x -= step * Gdx.graphics.getDeltaTime();
 
+                if(vec.x < borderMin.x)
+                    vec.x = borderMin.x;
+
+                Gdx.app.log("PATH LEFT (NC): ", "" + vec.x + "-" + path.size());
+                vec = null;
             }
-            /*
-            x -= step * Gdx.graphics.getDeltaTime();
-            if(x < 0)
-                x = 0;
 
-            Gdx.app.log("PATH LEFT : ", "" + x);
-
-            setX(x);*/
+            previousDirection = 4;
         }
+
         if (rightMove){
             if(previousDirection != 2){
+                Vector2 vec = new Vector2();
+                vec.x = path.get(path.size() - 1).x + step * Gdx.graphics.getDeltaTime();
+                vec.y = path.get(path.size() - 1).y;
 
+                if(vec.x < borderMin.x)
+                    vec.x = borderMin.x;
+
+                path.add(vec);
+                Gdx.app.log("PATH RIGHT (C): ", "" + vec.x);
+                vec = null;
             }else{
+                Vector2 vec = path.get(path.size() - 1);
+                vec.x += step * Gdx.graphics.getDeltaTime();
 
+                if(vec.x < borderMin.x)
+                    vec.x = borderMin.x;
+
+                Gdx.app.log("PATH RIGHT (NC): ", "" + vec.x + "-" + path.size());
+                vec = null;
             }
-            /*x += step * Gdx.graphics.getDeltaTime();
-            if(x > 620)
-                x = 620;
 
-            Gdx.app.log("PATH RIGHT : ", "" + x);
+            previousDirection = 2;
 
-            setX(x);*/
         }
+
         if (downMove){
             if(previousDirection != 3){
+                Vector2 vec = new Vector2();
+                vec.x = path.get(path.size() - 1).x;
+                vec.y = path.get(path.size() - 1).y + step * Gdx.graphics.getDeltaTime();
 
+                if(vec.y < borderMin.y)
+                    vec.y = borderMin.y;
+
+                path.add(vec);
+                Gdx.app.log("PATH DOWN (C): ", "" + vec.y);
+                vec = null;
             }else{
+                Vector2 vec = path.get(path.size() - 1);
+                vec.y += step * Gdx.graphics.getDeltaTime();
 
+                if(vec.y < borderMin.y)
+                    vec.y = borderMin.y;
+
+                Gdx.app.log("PATH DOWN (NC): ", "" + vec.y + "-" + path.size());
+                vec = null;
             }
-            /*y += step * Gdx.graphics.getDeltaTime();
-            if( y > 462)
-                y = 462;
+            previousDirection = 3;
 
-            Gdx.app.log("PATH UP : ", "" + y);
-
-            setY(y);*/
         }
+
         if (upMove){
             if(previousDirection != 1){
+                Vector2 vec = new Vector2();
+                vec.x = path.get(path.size() - 1).x;
+                vec.y = path.get(path.size() - 1).y - step * Gdx.graphics.getDeltaTime();
 
+                if(vec.y < borderMin.y)
+                    vec.y = borderMin.y;
+
+                path.add(vec);
+                Gdx.app.log("PATH DOWN (C): ", "" + vec.y);
+                vec = null;
             }else{
+                Vector2 vec = path.get(path.size() - 1);
+                vec.y -= step * Gdx.graphics.getDeltaTime();
 
+                if(vec.y < borderMin.y)
+                    vec.y = borderMin.y;
+
+                Gdx.app.log("PATH DOWN (NC): ", "" + vec.y + "-" + path.size());
+                vec = null;
             }
-            /*y -= step * Gdx.graphics.getDeltaTime();
-            if(y < 0)
-                y = 0;
+            previousDirection = 1;
 
-            Gdx.app.log("PATH DOWN : ", "" + y);
-
-            setY(y);*/
         }
     }
 

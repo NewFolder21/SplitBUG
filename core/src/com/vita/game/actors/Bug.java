@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 /**
  * Created by DzEN on 10.03.2015.
  */
-public class Bug extends Actor {
+public class Bug extends Actor implements IOwnInputsComands {
     private Texture bug;
     private Texture path_block;
     private final float step = 40.0f;
@@ -31,7 +31,6 @@ public class Bug extends Actor {
     public void draw(Batch batch, float alpha){
         updateMotion();
         batch.draw(bug, getX(), getY());
-
     }
 
     public void updateMotion(){

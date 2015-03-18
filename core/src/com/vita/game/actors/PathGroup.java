@@ -2,40 +2,26 @@ package com.vita.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
- * Created by vitaliy on 13.03.15.
+ * Created by DzEN on 19.03.2015.
  */
-public class Path extends Actor implements IOwnInputsComands {
-    private Texture path_block;
+public class PathGroup extends Group {
+
     private ArrayList<Vector2> path;
+    private PathPart currentActor;
     private int previousDirection;
     private Vector2 borderMin, borderMax;
     private final float step = 40.0f;
     boolean leftMove, rightMove, downMove, upMove;
-    /*0 : 0 ; vector
-    * 1 : 3 ; vector
-    * */
 
-    public Path(Vector2 start, Vector2 borderMin, Vector2 borderMax){
-        path = new ArrayList<>();
-        previousDirection = 0;
-        this.borderMin = borderMin;
-        this.borderMax = borderMax;
-        path_block = new Texture("white_square.png");
-        path.add(start);
-    }
-
-    @Override
-    public void draw(Batch batch, float alpha){
-        updateMotion();
-        batch.draw(path_block, getX(), getY());
+    public PathGroup(float x, float y){
+        super();
+        currentActor = new PathPart(x, y);
     }
 
     public void updateMotion(){
@@ -48,8 +34,13 @@ public class Path extends Actor implements IOwnInputsComands {
 
                 if(vec.x < borderMin.x)
                     vec.x = borderMin.x;
+                //End draw part line of path , and set x & y for new part line of path
+                currentActor.setSize(path.get(path.size() - 1).x - vec.x, path.get(path.size() - 1).y - vec.y);
+                addActor(currentActor);
+                currentActor = new PathPart(vec.x, vec.y);
 
                 path.add(vec);
+
                 Gdx.app.log("PATH LEFT (C): ", "" + vec.x);
                 vec = null;
             }else{
@@ -179,4 +170,3 @@ public class Path extends Actor implements IOwnInputsComands {
         downMove = t;
     }
 }
-//

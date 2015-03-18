@@ -1,34 +1,48 @@
-package com.vita.game;
+package com.vita.game.inputs;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.vita.game.actors.Bug;
+import com.vita.game.actors.IOwnInputsComands;
+import com.vita.game.utils.PathBuilder;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by DzEN on 11.03.2015.
  */
 public class OwnInputProcessor implements InputProcessor {
-    private Bug bug;
+    private ArrayList<IOwnInputsComands> actors;
+    private Iterator<IOwnInputsComands> iteratorActor;
 
-    public OwnInputProcessor(Bug bug){
-        super();
-        this.bug = bug;
+    public OwnInputProcessor(){
+        actors = new ArrayList<>();
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        iteratorActor = actors.iterator();
         switch (keycode){
             case Input.Keys.DOWN:
-                bug.setUpMove(true);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setUpMove(true);
+                }
                 break;
             case Input.Keys.UP:
-                bug.setDownMove(true);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setDownMove(true);
+                }
                 break;
             case Input.Keys.LEFT:
-                bug.setLeftMove(true);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setLeftMove(true);
+                }
                 break;
             case Input.Keys.RIGHT:
-                bug.setRightMove(true);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setRightMove(true);
+                }
                 break;
             default:
                 break;
@@ -39,18 +53,27 @@ public class OwnInputProcessor implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
 
+        iteratorActor = actors.iterator();
         switch (keycode){
             case Input.Keys.DOWN:
-                bug.setUpMove(false);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setUpMove(false);
+                }
                 break;
             case Input.Keys.UP:
-                bug.setDownMove(false);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setDownMove(false);
+                }
                 break;
             case Input.Keys.LEFT:
-                bug.setLeftMove(false);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setLeftMove(false);
+                }
                 break;
             case Input.Keys.RIGHT:
-                bug.setRightMove(false);
+                while(iteratorActor.hasNext()){
+                    iteratorActor.next().setRightMove(false);
+                }
                 break;
             default:
                 break;
@@ -86,5 +109,13 @@ public class OwnInputProcessor implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public void addInputsActor(IOwnInputsComands actor){
+        actors.add(actor);
+    }
+
+    public void removeAllInputsActors(){
+        actors.clear();
     }
 }
