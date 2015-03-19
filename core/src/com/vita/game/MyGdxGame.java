@@ -9,30 +9,37 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.vita.game.actors.Bug;
 import com.vita.game.actors.Path;
+import com.vita.game.actors.PathGroup;
 import com.vita.game.inputs.OwnInputProcessor;
 
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-    //Bug bug;
+    Bug bug;
     Stage stage;
     Path pathBuilder;
     OwnInputProcessor inputProcessor;
+    PathGroup pathGroup;
 
 	@Override
 	public void create () {
 
 		batch = new SpriteBatch();
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
-        //bug = new Bug(32, 32);
-        //bug.setSize(16,16);
-        pathBuilder = new Path( new Vector2(16f,16f),new Vector2(0f,0f),new Vector2(400f,400f));
+        bug = new Bug(32, 32);
+
+        //pathBuilder = new Path( new Vector2(16f,16f),new Vector2(0f,0f),new Vector2(400f,400f));
         inputProcessor = new OwnInputProcessor();
-        //inputProcessor.addInputsActor(bug);
-        inputProcessor.addInputsActor(pathBuilder);
+        inputProcessor.addInputsActor(bug);
+        //inputProcessor.addInputsActor(pathBuilder);
         Gdx.input.setInputProcessor(inputProcessor);
-        stage.addActor(pathBuilder);
-        //stage.addActor(bug);
+        stage.addActor(bug);
+
+        //**************************TEST
+        pathGroup = new PathGroup(0, 64);
+        inputProcessor.addInputsActor(pathGroup);
+        stage.addActor(pathGroup);
+        //******************************
     }
 
     @Override
