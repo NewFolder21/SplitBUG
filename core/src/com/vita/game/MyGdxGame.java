@@ -4,11 +4,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.vita.game.actors.Bug;
-import com.vita.game.actors.Path;
 import com.vita.game.actors.PathGroup;
 import com.vita.game.inputs.OwnInputProcessor;
 
@@ -17,7 +15,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
     Bug bug;
     Stage stage;
-    Path pathBuilder;
     OwnInputProcessor inputProcessor;
     PathGroup pathGroup;
 
@@ -36,7 +33,7 @@ public class MyGdxGame extends ApplicationAdapter {
         stage.addActor(bug);
 
         //**************************TEST
-        pathGroup = new PathGroup(0, 64);
+        pathGroup = new PathGroup(0, 0);
         inputProcessor.addInputsActor(pathGroup);
         stage.addActor(pathGroup);
         //******************************

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -14,14 +15,15 @@ public class Bug extends Actor implements IOwnInputsComands {
     private Texture bug;
     private Texture path_block;
     private final float step = 40.0f;
+    private Vector2 borderMin, borderMax;
     private float x, y;
     boolean leftMove, rightMove, downMove, upMove;
 
     public Bug(float posX, float posY){
         bug = new Texture("red_circle.png");
         path_block = new Texture("white_square.png");
-        x = 0;
-        y = posY;
+        x = -16;
+        y = -16;
         setX(x);
         setY(y);
 
@@ -36,37 +38,37 @@ public class Bug extends Actor implements IOwnInputsComands {
     public void updateMotion(){
         if (leftMove){
             x -= step * Gdx.graphics.getDeltaTime();
-            if(x < 0)
-                x = 0;
+            if(x < -16)
+                x = -16;
 
-            Gdx.app.log("LEFT : ", "" + x);
+            //Gdx.app.log("LEFT : ", "" + x);
 
             setX(x);
         }
         if (rightMove){
             x += step * Gdx.graphics.getDeltaTime();
-            if(x > 620)
-                x = 620;
+            if(x > 416)
+                x = 416;
 
-            Gdx.app.log("RIGHT : ", "" + x);
+            //Gdx.app.log("RIGHT : ", "" + x);
 
             setX(x);
         }
         if (downMove){
             y += step * Gdx.graphics.getDeltaTime();
-            if( y > 462)
-                y = 462;
+            if( y > 416)
+                y = 416;
 
-            Gdx.app.log("UP : ", "" + y);
+            //Gdx.app.log("UP : ", "" + y);
 
             setY(y);
         }
         if (upMove){
             y -= step * Gdx.graphics.getDeltaTime();
-            if(y < 0)
-                y = 0;
+            if(y < -16)
+                y = -16;
 
-            Gdx.app.log("DOWN : ", "" + y);
+            //Gdx.app.log("DOWN : ", "" + y);
 
             setY(y);
         }
