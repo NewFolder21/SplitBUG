@@ -12,7 +12,7 @@ public class PathBuilder {
     private ArrayList<Vector2> path;
     private int previousDirection;
     private Vector2 borderMin, borderMax;
-    private final float step = 40.0f;
+    private final float step = 80.0f;
     boolean leftMove, rightMove, downMove, upMove;
     /*0 : 0 ; vector
     * 1 : 3 ; vector

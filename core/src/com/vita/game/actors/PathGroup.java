@@ -18,14 +18,14 @@ public class PathGroup extends Group implements IOwnInputsComands {
     private PathPart currentActor;
     private int previousDirection;
     private Vector2 borderMin, borderMax;
-    private final float step = 40.0f;
+    private final float step = 80.0f;
     boolean leftMove, rightMove, downMove, upMove;
     private float bold = 2f;
 
     public PathGroup(float x, float y){
         super();
         borderMin = new Vector2(0,0);
-        borderMax = new Vector2(400, 400);
+        borderMax = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         path = new ArrayList<>();
         previousDirection = 0;
         path.add(new Vector2(x, y));
@@ -85,8 +85,8 @@ public class PathGroup extends Group implements IOwnInputsComands {
                 vec.x = path.get(path.size() - 1).x;
                 vec.y = path.get(path.size() - 1).y;
 
-                if(vec.x < borderMin.x)
-                    vec.x = borderMin.x;
+                if(vec.x > borderMax.x)
+                    vec.x = borderMax.x;
 
                 //currentActor.setSize(vec.x - path.get(path.size() - 1).x, 2);
                 addActor(currentActor);
@@ -99,8 +99,8 @@ public class PathGroup extends Group implements IOwnInputsComands {
                 vec = path.get(path.size() - 1);
                 vec.x += step * Gdx.graphics.getDeltaTime();
 
-                if(vec.x < borderMin.x)
-                    vec.x = borderMin.x;
+                if(vec.x > borderMax.x)
+                    vec.x = borderMax.x;
 
                 currentActor.setSize(vec.x - path.get(path.size() - 2).x, bold);
 
@@ -112,7 +112,7 @@ public class PathGroup extends Group implements IOwnInputsComands {
             previousDirection = 2;
 
         }
-
+        //MOVE UP =)
         if (downMove){
             if(previousDirection != 3 && previousDirection != 1){
                 vec = new Vector2();
@@ -120,8 +120,8 @@ public class PathGroup extends Group implements IOwnInputsComands {
                 vec.y = path.get(path.size() - 1).y;
                 //vec.y = path.get(path.size() - 1).y + step * Gdx.graphics.getDeltaTime();
 
-                if(vec.y < borderMin.y)
-                    vec.y = borderMin.y;
+                if(vec.y > borderMax.y)
+                    vec.y = borderMax.y;
 
                 //currentActor.setSize(2, path.get(path.size() - 1).y - vec.y);
                 addActor(currentActor);
@@ -134,8 +134,8 @@ public class PathGroup extends Group implements IOwnInputsComands {
                 vec = path.get(path.size() - 1);
                 vec.y += step * Gdx.graphics.getDeltaTime();
 
-                if(vec.y < borderMin.y)
-                    vec.y = borderMin.y;
+                if(vec.y > borderMax.y)
+                    vec.y = borderMax.y;
 
                 currentActor.setSize(bold, vec.y - path.get(path.size() - 2).y);
 
