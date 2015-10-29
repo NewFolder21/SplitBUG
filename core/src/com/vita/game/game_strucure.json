@@ -1,0 +1,19 @@
+{
+  "game" : {
+    "render": [
+      "bug",
+      "path",
+      "available block",
+      "grabbed block",
+      "enemies"
+    ],
+    "processing": [
+      "input",
+      "collision"
+    ],
+    "world": {
+      "objects": ["bug", "paths", "blocks", "enemies"],
+      "frame actions" : ["processing", "render"]
+    }
+  }
+}

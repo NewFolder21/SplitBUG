@@ -1,10 +1,9 @@
 package com.vita.game.inputs;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.vita.game.actors.Bug;
-import com.vita.game.actors.IOwnInputsComands;
-import com.vita.game.utils.PathBuilder;
+import com.vita.game.interfaces.IMyOwnInputsCommands;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,8 +12,8 @@ import java.util.Iterator;
  * Created by DzEN on 11.03.2015.
  */
 public class OwnInputProcessor implements InputProcessor {
-    private ArrayList<IOwnInputsComands> actors;
-    private Iterator<IOwnInputsComands> iteratorActor;
+    private ArrayList<IMyOwnInputsCommands> actors;
+    private Iterator<IMyOwnInputsCommands> iteratorActor;
 
     public OwnInputProcessor(){
         actors = new ArrayList<>();
@@ -26,12 +25,12 @@ public class OwnInputProcessor implements InputProcessor {
         switch (keycode){
             case Input.Keys.DOWN:
                 while(iteratorActor.hasNext()){
-                    iteratorActor.next().setUpMove(true);
+                    iteratorActor.next().setDownMove(true);
                 }
                 break;
             case Input.Keys.UP:
                 while(iteratorActor.hasNext()){
-                    iteratorActor.next().setDownMove(true);
+                    iteratorActor.next().setUpMove(true);
                 }
                 break;
             case Input.Keys.LEFT:
@@ -57,12 +56,12 @@ public class OwnInputProcessor implements InputProcessor {
         switch (keycode){
             case Input.Keys.DOWN:
                 while(iteratorActor.hasNext()){
-                    iteratorActor.next().setUpMove(false);
+                    iteratorActor.next().setDownMove(false);
                 }
                 break;
             case Input.Keys.UP:
                 while(iteratorActor.hasNext()){
-                    iteratorActor.next().setDownMove(false);
+                    iteratorActor.next().setUpMove(false);
                 }
                 break;
             case Input.Keys.LEFT:
@@ -83,6 +82,7 @@ public class OwnInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyTyped(char character) {
+        Gdx.app.log("TYPED : ", "");
         return false;
     }
 
@@ -111,7 +111,7 @@ public class OwnInputProcessor implements InputProcessor {
         return false;
     }
 
-    public void addInputsActor(IOwnInputsComands actor){
+    public void addInputsActor(IMyOwnInputsCommands actor){
         actors.add(actor);
     }
 

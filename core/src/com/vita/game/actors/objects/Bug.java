@@ -1,21 +1,21 @@
-package com.vita.game.actors;
+package com.vita.game.actors.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.vita.game.interfaces.IMyOwnInputsCommands;
 
 /**
  * Created by DzEN on 10.03.2015.
  */
-public class Bug extends Actor implements IOwnInputsComands {
+public class Bug extends Actor implements IMyOwnInputsCommands {
     private Texture bug;
     private Texture path_block;
     private final float step = 80.0f;
     private Vector2 borderMin, borderMax;
+    private Vector2 center;
     private float x, y;
     boolean leftMove, rightMove, downMove, upMove;
 
@@ -26,6 +26,7 @@ public class Bug extends Actor implements IOwnInputsComands {
         borderMax = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         x = -16;
         y = -16;
+        center = new Vector2(0,0);
         setX(x);
         setY(y);
 
@@ -38,7 +39,7 @@ public class Bug extends Actor implements IOwnInputsComands {
     }
 
     public void updateMotion(){
-        Gdx.app.log("CHECK COLLIDE : ", "" + checkColide());
+        Gdx.app.log("CHECK COLLIDE : ", "" + checkCollide());
         if (leftMove){
             x -= step * Gdx.graphics.getDeltaTime();
             if(x < -16)
@@ -110,7 +111,7 @@ public class Bug extends Actor implements IOwnInputsComands {
         downMove = t;
     }
 
-    public boolean  checkColide(){
+    public boolean  checkCollide(){
         if (x == -16 || x == borderMax.x - 16){
             return false;
         }
@@ -122,4 +123,6 @@ public class Bug extends Actor implements IOwnInputsComands {
         return true;
     }
 
+    public void update(float delta) {
+    }
 }

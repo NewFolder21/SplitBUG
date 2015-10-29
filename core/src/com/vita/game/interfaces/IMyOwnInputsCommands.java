@@ -1,9 +1,9 @@
-package com.vita.game.actors;
+package com.vita.game.interfaces;
 
 /**
  * Created by DzEN on 15.03.2015.
  */
-public interface IOwnInputsComands {
+public interface IMyOwnInputsCommands {
     public void setLeftMove(boolean t);
     public void setRightMove(boolean t);
     public void setUpMove(boolean t);

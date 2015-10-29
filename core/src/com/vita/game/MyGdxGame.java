@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.vita.game.actors.Bug;
-import com.vita.game.actors.PathGroup;
+import com.vita.game.actors.objects.Bug;
+import com.vita.game.actors.group.PathGroup;
 import com.vita.game.inputs.OwnInputProcessor;
 
 
