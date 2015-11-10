@@ -33,7 +33,7 @@ public class MyGdxGame extends ApplicationAdapter {
         stage.addActor(bug);
 
         //**************************TEST
-        pathGroup = new PathGroup(0, 0);
+        //pathGroup = new PathGroup(0, 0);
         inputProcessor.addInputsActor(pathGroup);
         stage.addActor(pathGroup);
         //******************************

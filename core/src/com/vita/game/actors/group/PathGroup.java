@@ -46,8 +46,8 @@ public class PathGroup extends Group implements IMyOwnInputsCommands {
         if(path.size() > 0){
             Vector2 vec;
             if (leftMove){
-
-                if(previousDirection != 4 && previousDirection != 2){
+                //If not 2 or 4
+                if(previousDirection % 2 != 0){
                     vec = new Vector2();
                     //vec.x = path.get(path.size() - 1).x - step * Gdx.graphics.getDeltaTime();
                     vec.x = path.get(path.size() - 1).x;
@@ -81,7 +81,7 @@ public class PathGroup extends Group implements IMyOwnInputsCommands {
             }
 
             if (rightMove){
-                if(previousDirection != 2 && previousDirection != 4){
+                if(previousDirection % 2 != 0){
                     vec = new Vector2();
                     //vec.x = path.get(path.size() - 1).x + step * Gdx.graphics.getDeltaTime();
                     vec.x = path.get(path.size() - 1).x;
@@ -116,7 +116,7 @@ public class PathGroup extends Group implements IMyOwnInputsCommands {
             }
             //MOVE UP =)
             if (downMove){
-                if(previousDirection != 3 && previousDirection != 1){
+                if(previousDirection % 2 == 0){
                     vec = new Vector2();
                     vec.x = path.get(path.size() - 1).x;
                     vec.y = path.get(path.size() - 1).y;
@@ -150,7 +150,7 @@ public class PathGroup extends Group implements IMyOwnInputsCommands {
             }
 
             if (upMove){
-                if(previousDirection != 1 && previousDirection != 3){
+                if(previousDirection % 2 == 0){
                     vec = new Vector2();
                     vec.x = path.get(path.size() - 1).x;
                     vec.y = path.get(path.size() - 1).y;

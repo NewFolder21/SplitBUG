@@ -19,9 +19,10 @@ public class MyGdxGameRestyling extends ApplicationAdapter {
     public void create() {
 
         world = new World();
-        worldRenderer = new WorldRenderer(world.getBug(), null, null, null, null);
+        worldRenderer = new WorldRenderer(world.getBug(), world.getPath(), null, world.getActiveBlock(), world.getInactiveBlock());
         inputProcessor = new OwnInputProcessor();
         inputProcessor.addInputsActor(world.getBug());
+        inputProcessor.addInputsActor(world.getPath());
         Gdx.input.setInputProcessor(inputProcessor);
     }
 

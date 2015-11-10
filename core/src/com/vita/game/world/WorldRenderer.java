@@ -1,7 +1,11 @@
 package com.vita.game.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.vita.game.actors.group.Enemies;
@@ -20,27 +24,30 @@ public class WorldRenderer {
     private ActiveBlock activeBlock;
     private InactiveBlock inactiveBlock;
     private Stage stage;
-    SpriteBatch batch;
+    PolygonSpriteBatch batch;
+    ShapeRenderer shapeRenderer;
 
     public WorldRenderer (BugRestyling bug, PathGroupRestyling path, Enemies enemies, ActiveBlock activeBlock, InactiveBlock inactiveBlock){
-        batch = new SpriteBatch();
+        batch = new PolygonSpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setAutoShapeType(true);
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         this.bug = bug;
-/*        this.path = path;
-        this.enemies = enemies;
         this.activeBlock = activeBlock;
-        this.inactiveBlock = inactiveBlock;*/
+        this.inactiveBlock = inactiveBlock;
+        this.path = path;
+        //this.path = path;
+        //this.enemies = enemies;
 
-        stage.addActor(bug);
-/*        stage.addActor(path);
-        stage.addActor(enemies);
+        stage.addActor(inactiveBlock);
         stage.addActor(activeBlock);
-        stage.addActor(inactiveBlock);*/
+        stage.addActor(path);
+        stage.addActor(bug);
+        //stage.addActor(enemies);
+        //stage.addActor(inactiveBlock);
     }
 
     public void render(){
-        batch.begin();
-        bug.draw(batch, 0);
-        batch.end();
+        stage.draw();
     }
 }
